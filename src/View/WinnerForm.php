@@ -3,13 +3,13 @@
     <div class="row">
         <div class="box col-lg-12 text-center">
             <h1 class="mt-5">Bravo !</h1>
-            <form name="form" action="/zec/public/?p=winner&password=<?= $password ?>" method="post">
+            <form name="form" action="/zec/public/?p=winner&password=<?= $password ?>" onsubmit="return validateForm()" method="post">
                 Nom :<br>
-                <input type="text" name="lastName" required><br>
+                <input type="text" name="lastName" maxlength="40" autofocus required /><br>
                 Prénom :<br>
-                <input type="text" name="firstName" required><br>
+                <input type="text" name="firstName" maxlength="40" required /><br>
                 Email :<br>
-                <input id="email" type="text" name="email" required><br>
+                <input id="email" type="text" name="email" maxlength="255" required /><br>
                 Vérification email :<br>
                 <input id="emailCheck" type="text"><br>
                 <input type="submit" value="Envoyer">
