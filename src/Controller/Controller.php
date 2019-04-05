@@ -23,6 +23,7 @@ class Controller
         
         
         $winnersNumber = $winnerRepository->getWinnerNumber();
+        
         if ($winnersNumber >= 2){
             $this->ContestOver();
         } else {
@@ -37,6 +38,7 @@ class Controller
         $title = "Concours des Zec";
         $header = '';
         $contestConfig = include(__DIR__."/../Config/ContestConfig.php");
+        
         $goodAnswers = 0;
         $question = [
             $contestConfig["question1"], 
@@ -44,7 +46,7 @@ class Controller
             $contestConfig["question3"], 
             $contestConfig["question4"]
         ];
-
+        
         $inputCheck = [
             1 => "",
             2 => "",
@@ -72,6 +74,7 @@ class Controller
             }
 
         }
+
         if ($goodAnswers == 4){
             
             $this->winnerForm();
@@ -93,8 +96,7 @@ class Controller
     public function winner()
     {
         $winnerRepository = new WinnerRepository;
-        $title = "Concours des Zec";
-        $header = '';
+        
         $contestConfig = include(__DIR__."/../Config/ContestConfig.php");
         $password = $contestConfig["password"];
 
@@ -106,7 +108,10 @@ class Controller
                     "email" => $_POST["email"]
                 ];
 
-                $winnerRepository->submitWinner($winner);
+                $validated = $winnerRepository->checkWinnerEmail($_POST["email"]);
+                if ($validated){
+                    $winnerRepository->submitWinner($winner);
+                }
 
                 /*
                 $to      = $_POST['email'];
@@ -120,6 +125,14 @@ class Controller
             }
         }
 
+        header("Location: /zec/public/?p=winnerScreen");
+        die();
+    }
+
+    public function winnerScreen()
+    {
+        $title = "Concours des Z'ec";
+        $header = '';
         require('../src/View/ContestWinner.php');
     }
 

@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center">
+        <div class="box col-lg-12 text-center">
             <h1 class="mt-5">Concours Zec</h1>
             <form action="/zec/public/" method="post">
                 <?= $question[0] ?> (réponse : test1):<br>
@@ -19,4 +19,4 @@
 </div>
 <?php 
 $content = ob_get_clean();
-require('base.php');
+require('Base.php');

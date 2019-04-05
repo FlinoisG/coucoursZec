@@ -9,7 +9,7 @@
         <link rel="icon" href="favicon.ico">
         <title><?= $title ?></title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/CSS/base.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
         <?= $header ?>
     </head>
     <body>

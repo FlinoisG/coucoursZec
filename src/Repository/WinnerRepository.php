@@ -39,7 +39,7 @@ class WinnerRepository
     }
 
     /**
-     * Undocumented function
+     * Retourne le nombre de gagnants
      *
      * @return int le nombre de gagnants
      */
@@ -49,6 +49,26 @@ class WinnerRepository
             $this->storeWinners();
         }
         return sizeof($this->winners);
+    }
+
+    /**
+     * Vérifie si un gagnant possède déjà un email identique
+     *
+     * @param array $winner
+     * @return bool 
+     */
+    public function checkWinnerEmail($winner)
+    {
+        if ($this->winners == []) {
+            $this->storeWinners();
+        }
+        $validated = true;
+        for ($i=0; $i < sizeof($this->winners); $i++) { 
+            if ($winner["email"] == $this->winners["email"]){
+                $validated = false;
+            }
+        }
+        return $validated;
     }
 
     /**
