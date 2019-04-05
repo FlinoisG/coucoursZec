@@ -48,10 +48,10 @@ class Controller
         ];
         
         $inputCheck = [
-            1 => "",
-            2 => "",
-            3 => "",
-            4 => ""
+            1 => "mauvais",
+            2 => "mauvais",
+            3 => "mauvais",
+            4 => "mauvais"
         ];
         if ($_POST != []) {
 
@@ -63,13 +63,23 @@ class Controller
             ];
 
             $postReps = $_POST;
+            $answerArray = [];
 
             for ($i=1; $i < 5; $i++) { 
-                if ($postReps['rep'.$i] == $rep['rep'.$i]){
-                    $inputCheck[$i] = "bon";
-                    $goodAnswers++;
-                } else {
-                    $inputCheck[$i] = "mauvais";
+                for ($q=1; $q < 5; $q++) { 
+                    if ($postReps['rep'.$i] == $rep['rep'.$q] ){
+                        $validated = true;
+                        foreach ($answerArray as $answer) {
+                            if ($postReps['rep'.$i] == $answer){
+                                $validated = false;
+                            }
+                        }
+                        if ($validated) {
+                            $inputCheck[$i] = "bon";
+                            $goodAnswers++;
+                            array_push($answerArray, $postReps['rep'.$i]);
+                        }
+                    }
                 }
             }
 
@@ -108,8 +118,9 @@ class Controller
                     "email" => $_POST["email"]
                 ];
 
-                $validated = $winnerRepository->checkWinnerEmail($_POST["email"]);
-                if ($validated){
+                $validated = $winnerRepository->checkWinnerEmail($winner["email"]);
+
+                if ($validated && $winner["email"] != ""){
                     $winnerRepository->submitWinner($winner);
                 }
 

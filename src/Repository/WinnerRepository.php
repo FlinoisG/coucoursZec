@@ -82,6 +82,9 @@ class WinnerRepository
         $nom = str_replace("'", "\'", $winner['nom']);
         $prenom = str_replace("'", "\'", $winner['prenom']);
         $email = str_replace("'", "\'", $winner['email']);
+        $nom = str_replace('"', '\"', $winner['nom']);
+        $prenom = str_replace('"', '\"', $winner['prenom']);
+        $email = str_replace('"', '\"', $winner['email']);
         $mysqlQuery = new mysqlQuery();
         $mysqlQuery->sqlQuery('INSERT INTO winners(nom, prenom, email) VALUES(
             \'' . htmlspecialchars($nom) . '\',
